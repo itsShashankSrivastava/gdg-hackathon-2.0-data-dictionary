@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Dictionary Agent v4 - Client Presentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.8;
+            padding: 0;
+        }
+
+        .document {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+            min-height: 100vh;
+        }
+
+        .page {
+            padding: 60px 80px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        /* Cover Page */
+        .cover-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-bottom: 3px solid #6366f1;
+            background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);
+        }
+
+        .doc-label {
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #64748b;
+            margin-bottom: 30px;
+            border: 2px solid #cbd5e1;
+            padding: 8px 24px;
+            display: inline-block;
+        }
+
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #475569;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .doc-info {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #cbd5e1;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .doc-info p {
+            margin: 8px 0;
+        }
+
+        /* Section Styles */
+        .section-number {
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #6366f1;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        h3 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 25px 0 15px;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #334155;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        strong {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        /* Lists */
+        ul {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        ul li {
+            margin-bottom: 12px;
+            color: #334155;
+            line-height: 1.7;
+        }
+
+        ul li strong {
+            color: #0f172a;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: #f8fafc;
+            border-left: 4px solid #6366f1;
+            padding: 25px 30px;
+            margin: 30px 0;
+        }
+
+        .problem-box {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+        }
+
+        .solution-box {
+            background: #f0fdf4;
+            border-left: 4px solid #16a34a;
+        }
+
+        .info-box h3 {
+            margin-top: 0;
+            color: #0f172a;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px 10px;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #6366f1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.875rem;
+            color: #64748b;
+            line-height: 1.3;
+        }
+
+        /* Flow Diagram */
+        .figure {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .figure-label {
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 15px;
+        }
+
+        .diagram-frame {
+            border: 1px solid #cbd5e1;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 8px;
+        }
+
+        .figure-caption {
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 15px;
+            font-style: italic;
+            text-align: center;
+        }
+
+        /* CSS Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .flow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .flow-box {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-align: center;
+            min-width: 140px;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .flow-box.input {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .flow-box.process {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        }
+
+        .flow-box.ai {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .flow-box.output {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .flow-arrow {
+            color: #94a3b8;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .flow-arrow.down {
+            font-size: 2rem;
+            margin: 10px 0;
+        }
+
+        /* Architecture Diagram */
+        .architecture-diagram {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .arch-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .arch-label {
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+
+        .arch-box {
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .arch-box.frontend {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+        }
+
+        .arch-box.backend {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+        }
+
+        .arch-box.database {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fcd34d;
+        }
+
+        .arch-box.ai {
+            background: #ede9fe;
+            color: #5b21b6;
+            border: 1px solid #c4b5fd;
+        }
+
+        .arch-connector {
+            display: flex;
+            align-items: center;
+            color: #94a3b8;
+            font-size: 1.5rem;
+        }
+
+        /* Steps Table */
+        .steps-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .steps-table th,
+        .steps-table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #e2e8f0;
+        }
+
+        .steps-table th {
+            background: #f8fafc;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .steps-table td:first-child {
+            text-align: center;
+            font-weight: 700;
+            color: #6366f1;
+            width: 60px;
+        }
+
+        /* Tech Stack Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tech-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .tech-card h4 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #6366f1;
+            margin-bottom: 10px;
+        }
+
+        .tech-card ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .tech-card li {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        /* Footer */
+        .doc-footer {
+            text-align: center;
+            padding: 40px 80px;
+            background: linear-gradient(to bottom, #f8fafc, #f1f5f9);
+            border-top: 3px solid #6366f1;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        .doc-footer p {
+            text-align: center;
+            margin: 8px 0;
+        }
+
+        /* Page breaks for printing */
+        @media print {
+            .page {
+                page-break-inside: avoid;
+                page-break-after: always;
+            }
+
+            .cover-page {
+                page-break-after: always;
+            }
+
+            .document {
+                box-shadow: none;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page {
+                padding: 40px 30px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .architecture-diagram {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .arch-connector {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document">
+        <!-- Cover Page -->
+        <div class="cover-page">
+            <span class="doc-label">Client Presentation</span>
+            <h1>Data Dictionary Agent</h1>
+            <span class="version-badge">Version 4.0</span>
+            <p class="subtitle">AI-Powered Database Documentation & Analysis Platform with Modern Web Architecture</p>
+            
+            <div class="doc-info">
+                <p><strong>Project:</strong> GDG Hackfest 2.0 Submission</p>
+                <p><strong>Architecture:</strong> React + FastAPI</p>
+                <p><strong>Date:</strong> February 2026</p>
+            </div>
+        </div>
+
+        <!-- Section 1: Executive Summary -->
+        <div class="page">
+            <div class="section-number">SECTION 1</div>
+            <h2>Executive Summary</h2>
+            
+            <p>
+                <strong>Data Dictionary Agent</strong> is an enterprise-grade solution that automatically generates 
+                comprehensive database documentation using artificial intelligence. Organizations no longer need to 
+                spend weeks manually documenting databases—our platform does it in minutes.
+            </p>
+
+            <div class="solution-box info-box">
+                <h3>What We Deliver</h3>
+                <p>
+                    Connect your database → Get instant AI-generated documentation including schema details, 
+                    data quality analysis, business context explanations, and interactive Q&A—all exportable 
+                    in multiple formats ready for your team.
+                </p>
+            </div>
+
+            <h3>Key Value Propositions</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">90%</div>
+                    <div class="stat-label">Time Saved on Documentation</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">6+</div>
+                    <div class="stat-label">Database Types Supported</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">AI</div>
+                    <div class="stat-label">Powered Insights</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Export Formats</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Always Available</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: The Problem -->
+        <div class="page">
+            <div class="section-number">SECTION 2</div>
+            <h2>The Problem We Solve</h2>
+            
+            <p>
+                Modern organizations rely heavily on data, yet most databases remain poorly documented. 
+                This creates massive inefficiencies that cost companies time, money, and competitive advantage.
+            </p>
+
+            <div class="problem-box info-box">
+                <h3>The Hidden Cost of Undocumented Databases</h3>
+                <p>
+                    Data teams spend <strong>40% or more</strong> of their time just trying to understand existing 
+                    data structures—time that could be spent creating business value. When employees leave, 
+                    critical database knowledge leaves with them.
+                </p>
+            </div>
+
+            <h3>Pain Points We Address</h3>
+            <ul>
+                <li><strong>Wasted Time:</strong> Hours spent exploring databases before any real work can begin</li>
+                <li><strong>Outdated Docs:</strong> Manual documentation becomes stale the moment it's written</li>
+                <li><strong>Hidden Quality Issues:</strong> Data problems discovered only after they cause failures</li>
+                <li><strong>Knowledge Silos:</strong> Only certain people know how the database works</li>
+                <li><strong>Slow Onboarding:</strong> New team members take weeks to become productive</li>
+            </ul>
+
+            <div class="figure">
+                <div class="figure-label">Figure 1: Traditional Documentation Workflow</div>
+                <div class="diagram-frame">
+                    <div class="flow-diagram">
+                        <div class="flow-row">
+                            <div class="flow-box input">Database</div>
+                            <span class="flow-arrow">→</span>
+                            <div class="flow-box" style="background: #94a3b8;">Manual Review</div>
+                            <span class="flow-arrow">→</span>
+                            <div class="flow-box" style="background: #94a3b8;">Write Docs</div>
+                            <span class="flow-arrow">→</span>
+                            <div class="flow-box output">Static PDF</div>
+                        </div>
+                        <div style="margin: 20px 0; color: #dc2626; font-family: 'Roboto', sans-serif; font-weight: 500;">
+                            ⚠️ Weeks of effort → Outdated immediately → Lost when team changes
+                        </div>
+                    </div>
+                </div>
+                <p class="figure-caption">Traditional manual documentation is slow, error-prone, and quickly becomes obsolete</p>
+            </div>
+        </div>
+
+        <!-- Section 3: Our Solution -->
+        <div class="page">
+            <div class="section-number">SECTION 3</div>
+            <h2>Our Solution</h2>
+            
+            <p>
+                <strong>Data Dictionary Agent v4</strong> automates the entire documentation process using AI, 
+                delivering comprehensive, always-accurate documentation in minutes instead of weeks.
+            </p>
+
+            <div class="figure">
+                <div class="figure-label">Figure 2: Automated Documentation Pipeline</div>
+                <div class="diagram-frame">
+                    <div class="flow-diagram">
+                        <div class="flow-row">
+                            <div class="flow-box input">🗄️ Connect Database</div>
+                            <span class="flow-arrow">→</span>
+                            <div class="flow-box process">🔍 Extract Schema</div>
+                            <span class="flow-arrow">→</span>
+                            <div class="flow-box process">📊 Analyze Quality</div>
+                        </div>
+                        <span class="flow-arrow down">↓</span>
+                        <div class="flow-row">
+                            <div class="flow-box output">📄 Export Docs</div>
+                            <span class="flow-arrow">←</span>
+                            <div class="flow-box ai">🤖 AI Enrichment</div>
+                            <span class="flow-arrow">←</span>
+                            <div class="flow-box process">⚙️ Process Data</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="figure-caption">Fully automated pipeline from database connection to professional documentation</p>
+            </div>
+
+            <h3>How It Works</h3>
+            <table class="steps-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Action</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><strong>Connect</strong> — Enter your database credentials</td>
+                        <td>Secure connection established</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>Extract</strong> — Automatic schema discovery</td>
+                        <td>All tables, columns, relationships mapped</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>Analyze</strong> — Data quality assessment</td>
+                        <td>Quality scores, issues identified</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>Enrich</strong> — AI generates business context</td>
+                        <td>Human-readable descriptions & insights</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><strong>Export</strong> — Download documentation</td>
+                        <td>JSON, Markdown, or HTML formats</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 4: System Architecture -->
+        <div class="page">
+            <div class="section-number">SECTION 4</div>
+            <h2>System Architecture</h2>
+            
+            <p>
+                Version 4 features a modern, scalable architecture with a React frontend and FastAPI backend, 
+                designed for enterprise deployment and extensibility.
+            </p>
+
+            <div class="figure">
+                <div class="figure-label">Figure 3: High-Level Architecture</div>
+                <div class="diagram-frame">
+                    <div class="architecture-diagram">
+                        <div class="arch-column">
+                            <span class="arch-label">Frontend</span>
+                            <div class="arch-box frontend">React + Vite</div>
+                            <div class="arch-box frontend">Tailwind CSS</div>
+                            <div class="arch-box frontend">React Router</div>
+                        </div>
+                        
+                        <div class="arch-connector">⟷</div>
+                        
+                        <div class="arch-column">
+                            <span class="arch-label">Backend API</span>
+                            <div class="arch-box backend">FastAPI</div>
+                            <div class="arch-box backend">SQLAlchemy</div>
+                            <div class="arch-box backend">Pydantic</div>
+                        </div>
+                        
+                        <div class="arch-connector">⟷</div>
+                        
+                        <div class="arch-column">
+                            <span class="arch-label">Data Sources</span>
+                            <div class="arch-box database">PostgreSQL</div>
+                            <div class="arch-box database">MySQL</div>
+                            <div class="arch-box database">SQL Server</div>
+                        </div>
+                        
+                        <div class="arch-connector">⟷</div>
+                        
+                        <div class="arch-column">
+                            <span class="arch-label">AI Services</span>
+                            <div class="arch-box ai">Groq LLM</div>
+                            <div class="arch-box ai">llama-3.3-70b</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="figure-caption">Decoupled architecture enables independent scaling and deployment</p>
+            </div>
+
+            <h3>Technology Stack</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>🎨 Frontend</h4>
+                    <ul>
+                        <li>React 18 with Vite</li>
+                        <li>Tailwind CSS for styling</li>
+                        <li>React Router for navigation</li>
+                        <li>Axios for API calls</li>
+                    </ul>
+                </div>
+                <div class="tech-card">
+                    <h4>⚙️ Backend</h4>
+                    <ul>
+                        <li>FastAPI (Python)</li>
+                        <li>SQLAlchemy ORM</li>
+                        <li>Pydantic validation</li>
+                        <li>RESTful API design</li>
+                    </ul>
+                </div>
+                <div class="tech-card">
+                    <h4>🗄️ Database Support</h4>
+                    <ul>
+                        <li>PostgreSQL</li>
+                        <li>MySQL</li>
+                        <li>SQL Server</li>
+                        <li>SQLite, Snowflake, Oracle</li>
+                    </ul>
+                </div>
+                <div class="tech-card">
+                    <h4>🤖 AI Integration</h4>
+                    <ul>
+                        <li>Groq API</li>
+                        <li>llama-3.3-70b-versatile</li>
+                        <li>Contextual prompting</li>
+                        <li>Multi-turn chat</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Key Features -->
+        <div class="page">
+            <div class="section-number">SECTION 5</div>
+            <h2>Key Features</h2>
+
+            <h3>📊 Interactive Dashboard</h3>
+            <p>
+                A modern, responsive dashboard provides at-a-glance visibility into your database structure, 
+                AI-generated business summaries, and aggregate quality metrics. Users can quickly navigate 
+                to detailed views of any table or column.
+            </p>
+
+            <h3>🔍 Comprehensive Schema Explorer</h3>
+            <p>
+                Browse all tables and columns with detailed metadata including data types, primary/foreign 
+                keys, indexes, constraints, and relationships. Filter and search to quickly find what you need.
+            </p>
+
+            <h3>📈 Data Quality Analysis</h3>
+            <p>
+                Each table receives a quality score (0-100) based on completeness, uniqueness, and consistency. 
+                Drill down to column-level metrics to identify specific issues requiring attention.
+            </p>
+
+            <div class="info-box">
+                <h3>Quality Metrics Calculated</h3>
+                <ul>
+                    <li><strong>Completeness:</strong> Percentage of non-null values</li>
+                    <li><strong>Uniqueness:</strong> Ratio of distinct values to total rows</li>
+                    <li><strong>Key Health:</strong> Primary and foreign key integrity</li>
+                    <li><strong>Statistical Profile:</strong> Distribution, outliers, patterns</li>
+                </ul>
+            </div>
+
+            <h3>🤖 AI-Powered Insights</h3>
+            <p>
+                Groq's llama-3.3-70b model generates human-readable business context for your entire database, 
+                explaining what each table does, how tables relate to each other, and providing actionable 
+                recommendations for improvements.
+            </p>
+
+            <h3>💬 Interactive Chat Interface</h3>
+            <p>
+                Ask questions about your database in plain English. The AI-powered chat understands your 
+                schema context and provides accurate answers instantly—no SQL expertise required.
+            </p>
+
+            <h3>📄 Multi-Format Export</h3>
+            <p>
+                Export complete documentation in JSON (for API integration), Markdown (for version control), 
+                or styled HTML (for sharing with stakeholders). All formats include full schema details, 
+                quality metrics, and AI insights.
+            </p>
+        </div>
+
+        <!-- Section 6: Workflow Comparison -->
+        <div class="page">
+            <div class="section-number">SECTION 6</div>
+            <h2>Before & After Comparison</h2>
+            
+            <p>
+                See how Data Dictionary Agent transforms the database documentation workflow from a 
+                manual, error-prone process to an automated, intelligent system.
+            </p>
+
+            <table class="steps-table">
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>❌ Without Data Dictionary Agent</th>
+                        <th>✅ With Data Dictionary Agent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>⏱️</td>
+                        <td>Weeks to document a database</td>
+                        <td>Minutes to generate documentation</td>
+                    </tr>
+                    <tr>
+                        <td>🔄</td>
+                        <td>Documentation outdated immediately</td>
+                        <td>Re-run anytime for fresh docs</td>
+                    </tr>
+                    <tr>
+                        <td>📊</td>
+                        <td>No visibility into data quality</td>
+                        <td>Quality scores with drill-down</td>
+                    </tr>
+                    <tr>
+                        <td>🧠</td>
+                        <td>Knowledge trapped in people's heads</td>
+                        <td>Business context preserved in docs</td>
+                    </tr>
+                    <tr>
+                        <td>❓</td>
+                        <td>Ask around to understand tables</td>
+                        <td>Ask AI chatbot for instant answers</td>
+                    </tr>
+                    <tr>
+                        <td>👥</td>
+                        <td>Weeks for new hire onboarding</td>
+                        <td>Self-service documentation access</td>
+                    </tr>
+                    <tr>
+                        <td>💰</td>
+                        <td>High cost of manual effort</td>
+                        <td>Low cost, fully automated</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="solution-box info-box">
+                <h3>ROI Highlights</h3>
+                <ul>
+                    <li>Reduce documentation time by <strong>90%+</strong></li>
+                    <li>Accelerate new team member onboarding</li>
+                    <li>Catch data quality issues before they impact business</li>
+                    <li>Preserve institutional knowledge permanently</li>
+                    <li>Enable self-service data discovery across teams</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 7: Demo Flow -->
+        <div class="page">
+            <div class="section-number">SECTION 7</div>
+            <h2>Live Demo Flow</h2>
+            
+            <p>
+                Follow this guided walkthrough to see Data Dictionary Agent in action with a sample database.
+            </p>
+
+            <div class="figure">
+                <div class="figure-label">Figure 4: User Journey</div>
+                <div class="diagram-frame">
+                    <div class="flow-diagram">
+                        <div class="flow-row">
+                            <div class="flow-box input">🏠 Landing Page</div>
+                            <span class="flow-arrow">→</span>
+                            <div class="flow-box process">🔗 Connect DB</div>
+                            <span class="flow-arrow">→</span>
+                            <div class="flow-box process">📊 Dashboard</div>
+                        </div>
+                        <span class="flow-arrow down">↓</span>
+                        <div class="flow-row">
+                            <div class="flow-box output">📥 Export</div>
+                            <span class="flow-arrow">←</span>
+                            <div class="flow-box ai">💬 Chat</div>
+                            <span class="flow-arrow">←</span>
+                            <div class="flow-box process">📋 Tables</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="steps-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Screen</th>
+                        <th>Demo Talking Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><strong>Connection</strong></td>
+                        <td>Enter database credentials, select database type, click Connect</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>Dashboard</strong></td>
+                        <td>Show AI summary, table count, average quality score, overview cards</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><strong>Tables</strong></td>
+                        <td>Browse schema, click a table to see columns, quality metrics per table</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>Quality</strong></td>
+                        <td>Show quality scores, drill into issues, explain recommendations</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><strong>Chat</strong></td>
+                        <td>Ask "What tables store customer data?" and show AI response</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><strong>Export</strong></td>
+                        <td>Download Markdown and HTML, show generated documentation files</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer -->
+        <div class="doc-footer">
+            <p><strong>Data Dictionary Agent v4</strong></p>
+            <p>Client Presentation — February 2026</p>
+            <p>GDG Hackfest 2.0 Project Submission</p>
+            <p style="margin-top: 20px; font-size: 0.8rem;">
+                Built with React · FastAPI · Groq LLM (llama-3.3-70b-versatile) · SQLAlchemy
+            </p>
+            <p style="margin-top: 10px; font-size: 0.8rem; color: #94a3b8;">
+                © 2026 — AI-Powered Database Documentation
+            </p>
+        </div>
+    </div>
+</body>
+</html>

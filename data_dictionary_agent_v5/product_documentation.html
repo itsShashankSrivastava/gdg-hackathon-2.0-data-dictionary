@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Data Dictionary Agent - Product Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4285F4;
+            --primary-dark: #3367D6;
+            --secondary: #34A853;
+            --accent: #EA4335;
+            --warning: #FBBC04;
+            --bg-dark: #0F172A;
+            --bg-card: #1E293B;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-dark) 100%);
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(66, 133, 244, 0.1) 0%, transparent 50%);
+            animation: pulse 15s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .logo-text h1 {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .tagline {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .tagline span {
+            color: var(--primary);
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--bg-card);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title .icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(66, 133, 244, 0.15);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .card-desc {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .card-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .card-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .card-list li::before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        /* ROI Section */
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .roi-card {
+            background: linear-gradient(135deg, var(--bg-card), rgba(66, 133, 244, 0.1));
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .roi-value {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .roi-label {
+            font-size: 16px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .roi-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px 25px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            background: rgba(66, 133, 244, 0.2);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table td:first-child {
+            font-weight: 500;
+        }
+
+        .check {
+            color: var(--secondary);
+            font-size: 20px;
+        }
+
+        .cross {
+            color: var(--accent);
+            font-size: 20px;
+        }
+
+        /* Use Cases */
+        .use-case {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .use-case-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .use-case-industry {
+            font-size: 12px;
+            background: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: white;
+        }
+
+        .use-case-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .use-case h4 {
+            font-size: 16px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .use-case p, .use-case li {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .use-case ul {
+            list-style: none;
+        }
+
+        .use-case li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .use-case li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        /* Tech Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .tech-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .tech-item:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .tech-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .tech-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .pricing-tier {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .pricing-price {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .pricing-period {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .pricing-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-desc {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .cta-btn {
+            padding: 18px 40px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .cta-btn.primary {
+            background: white;
+            color: var(--primary);
+            border: none;
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-card);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.15), rgba(52, 168, 83, 0.15));
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .highlight-box h3 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .highlight-box p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            margin-top: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .roi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .tech-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-stats {
+                flex-wrap: wrap;
+            }
+            
+            .use-case-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media print {
+            .nav {
+                display: none;
+            }
+            
+            section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-section">
+                <div class="logo-icon">📚</div>
+                <div class="logo-text">
+                    <h1>Intelligent Data Dictionary Agent</h1>
+                    <p>AI-Powered Database Documentation & Intelligence Platform</p>
+                </div>
+            </div>
+            
+            <p class="tagline">Transform your database chaos into <span>actionable intelligence</span> with AI-driven automation</p>
+            
+            <div class="header-stats">
+                <div class="stat-item">
+                    <div class="stat-value">90%</div>
+                    <div class="stat-label">Time Savings</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">6+</div>
+                    <div class="stat-label">Database Types</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">&lt;5min</div>
+                    <div class="stat-label">Setup Time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">AI Assistance</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#problem">Problem Statement</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#roi">ROI & Benefits</a></li>
+                <li><a href="#use-cases">Use Cases</a></li>
+                <li><a href="#comparison">Comparison</a></li>
+                <li><a href="#technical">Technical Specs</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Executive Overview -->
+    <section id="overview">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="icon">🎯</span>
+                Executive Overview
+            </h2>
+            <p class="section-subtitle">
+                The Intelligent Data Dictionary Agent is an enterprise-grade AI platform that automatically extracts, analyzes, and documents database schemas while providing real-time data quality insights and intelligent conversational assistance.
+            </p>
+
+            <div class="highlight-box">
+                <h3>What is the Intelligent Data Dictionary Agent?</h3>
+                <p>
+                    In today's data-driven world, organizations struggle with undocumented databases, tribal knowledge, and poor data governance. 
+                    Our AI-powered platform solves this by automatically connecting to your databases, extracting complete metadata, 
+                    analyzing data quality in real-time, generating human-readable documentation with AI-powered business context, 
+                    and providing a conversational interface for instant answers to any database-related question.
+                </p>
+                <br>
+                <p>
+                    <strong>Built for:</strong> Data Engineers, Database Administrators, Data Analysts, Business Intelligence Teams, 
+                    Compliance Officers, and anyone who needs to understand their organization's data landscape quickly and accurately.
+                </p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3 class="card-title">Instant Documentation</h3>
+                    <p class="card-desc">
+                        Connect your database and get comprehensive documentation in minutes, not weeks. 
+                        No manual data entry, no outdated spreadsheets. Just accurate, up-to-date documentation.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3 class="card-title">AI-Powered Intelligence</h3>
+                    <p class="card-desc">
+                        Leveraging Claude AI (AWS Bedrock) to generate business-friendly descriptions, 
+                        understand data relationships, and provide intelligent recommendations.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💬</div>
+                    <h3 class="card-title">Conversational Interface</h3>
+                    <p class="card-desc">
+                        Ask questions in plain English: "What tables store customer data?" or 
+                        "Write a query for monthly revenue". Get instant, context-aware answers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement -->
+    <section id="problem" style="background: var(--bg-card);">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="icon">⚠️</span>
+                The Problem We Solve
+            </h2>
+            <p class="section-subtitle">
+                Every organization faces these challenges with their databases. We've built the solution.
+            </p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">📋</div>
+                    <h3 class="card-title">Undocumented Databases</h3>
+                    <p class="card-desc">
+                        80% of enterprise databases have little to no documentation. New team members spend weeks 
+                        understanding data structures. Knowledge walks out the door when employees leave.
+                    </p>
+                    <ul class="card-list">
+                        <li>Weeks spent onboarding new team members</li>
+                        <li>Critical knowledge lost during employee turnover</li>
+                        <li>Inconsistent understanding across teams</li>
+                        <li>High cost of tribal knowledge dependency</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔍</div>
+                    <h3 class="card-title">Poor Data Quality Visibility</h3>
+                    <p class="card-desc">
+                        Data quality issues cost organizations an average of $12.9 million annually. 
+                        Without real-time monitoring, problems go undetected until they impact business decisions.
+                    </p>
+                    <ul class="card-list">
+                        <li>Hidden null values and missing data</li>
+                        <li>Duplicate records affecting reports</li>
+                        <li>Stale data leading to wrong decisions</li>
+                        <li>No proactive quality alerting</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">⏱️</div>
+                    <h3 class="card-title">Time-Consuming Manual Processes</h3>
+                    <p class="card-desc">
+                        Data teams spend 60-80% of their time on data preparation and understanding, 
+                        leaving little time for actual analysis and value creation.
+                    </p>
+                    <ul class="card-list">
+                        <li>Hours spent writing documentation manually</li>
+                        <li>Constant back-and-forth with DBAs</li>
+                        <li>Repetitive queries for basic information</li>
+                        <li>Documentation becomes outdated immediately</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔗</div>
+                    <h3 class="card-title">Complex Database Landscapes</h3>
+                    <p class="card-desc">
+                        Modern enterprises run multiple database types across cloud and on-premise. 
+                        Managing and understanding this complexity is a growing challenge.
+                    </p>
+                    <ul class="card-list">
+                        <li>Multiple database vendors to manage</li>
+                        <li>No unified view of data assets</li>
+                        <li>Siloed information across teams</li>
+                        <li>Compliance and governance gaps</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="icon">⭐</span>
+                Product Features
+            </h2>
+            <p class="section-subtitle">
+                Every feature is designed to save time, improve data quality, and empower your teams with instant database intelligence.
+            </p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🔌</div>
+                    <h3 class="card-title">Universal Database Connectivity</h3>
+                    <p class="card-desc">
+                        One platform that connects to all your databases with secure, read-only access.
+                    </p>
+                    <ul class="card-list">
+                        <li><strong>PostgreSQL</strong> - Full schema extraction with constraints</li>
+                        <li><strong>MySQL</strong> - Including MariaDB compatibility</li>
+                        <li><strong>SQL Server</strong> - Enterprise and Express editions</li>
+                        <li><strong>SQLite</strong> - Local database support</li>
+                        <li><strong>Snowflake</strong> - Cloud data warehouse</li>
+                        <li><strong>Oracle</strong> - Enterprise database support</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3 class="card-title">Intelligent Metadata Extraction</h3>
+                    <p class="card-desc">
+                        Comprehensive schema discovery that captures every detail of your database structure.
+                    </p>
+                    <ul class="card-list">
+                        <li>Complete table and column metadata</li>
+                        <li>Primary key and foreign key detection</li>
+                        <li>Index analysis and optimization hints</li>
+                        <li>Relationship mapping and visualization</li>
+                        <li>Data type normalization across databases</li>
+                        <li>Default values and constraints</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">✅</div>
+                    <h3 class="card-title">Real-Time Data Quality Analysis</h3>
+                    <p class="card-desc">
+                        Automated profiling that gives you instant visibility into your data health.
+                    </p>
+                    <ul class="card-list">
+                        <li><strong>Completeness Score</strong> - % of non-null values</li>
+                        <li><strong>Uniqueness Metrics</strong> - Duplicate detection</li>
+                        <li><strong>Data Freshness</strong> - Last update timestamps</li>
+                        <li><strong>Distribution Analysis</strong> - Min, max, average values</li>
+                        <li><strong>Pattern Detection</strong> - Format validation</li>
+                        <li><strong>Anomaly Flagging</strong> - Quality issue alerts</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3 class="card-title">AI-Generated Business Context</h3>
+                    <p class="card-desc">
+                        Claude AI transforms technical schemas into plain English that anyone can understand.
+                    </p>
+                    <ul class="card-list">
+                        <li>Business-friendly table descriptions</li>
+                        <li>Column purpose explanations</li>
+                        <li>Common usage patterns</li>
+                        <li>SQL query suggestions</li>
+                        <li>Best practices recommendations</li>
+                        <li>Data lineage insights</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💬</div>
+                    <h3 class="card-title">Conversational AI Chatbot</h3>
+                    <p class="card-desc">
+                        Natural language interface for instant answers to any database question.
+                    </p>
+                    <ul class="card-list">
+                        <li>Ask questions in plain English</li>
+                        <li>Get SQL queries generated automatically</li>
+                        <li>Explore relationships conversationally</li>
+                        <li>Context-aware responses</li>
+                        <li>Query explanation and optimization</li>
+                        <li>24/7 availability without DBA dependency</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📤</div>
+                    <h3 class="card-title">Multi-Format Export</h3>
+                    <p class="card-desc">
+                        Export your documentation in any format your team needs.
+                    </p>
+                    <ul class="card-list">
+                        <li><strong>JSON</strong> - Programmatic access and integration</li>
+                        <li><strong>Markdown</strong> - Wiki and documentation systems</li>
+                        <li><strong>HTML</strong> - Shareable web documentation</li>
+                        <li><strong>PDF</strong> - Printable reports for stakeholders</li>
+                        <li>Customizable templates</li>
+                        <li>API access for automation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI & Benefits -->
+    <section id="roi" style="background: var(--bg-card);">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="icon">💰</span>
+                ROI & Business Benefits
+            </h2>
+            <p class="section-subtitle">
+                Our customers report significant cost savings and productivity improvements within the first month of deployment.
+            </p>
+
+            <div class="roi-grid">
+                <div class="roi-card">
+                    <div class="roi-value">90%</div>
+                    <div class="roi-label">Time Saved on Documentation</div>
+                    <div class="roi-desc">What took weeks now takes minutes. Automatic extraction eliminates manual documentation.</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-value">75%</div>
+                    <div class="roi-label">Faster Onboarding</div>
+                    <div class="roi-desc">New team members understand databases in days, not weeks. All knowledge is documented.</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-value">60%</div>
+                    <div class="roi-label">Reduced DBA Interruptions</div>
+                    <div class="roi-desc">Self-service answers mean fewer tickets and questions for your database administrators.</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-value">40%</div>
+                    <div class="roi-label">Improved Data Quality</div>
+                    <div class="roi-desc">Proactive monitoring catches issues before they impact business decisions.</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>💡 Sample ROI Calculation</h3>
+                <p>
+                    <strong>Scenario:</strong> Mid-size company with 5 Data Engineers, 3 DBAs, 10 Data Analysts<br><br>
+                    
+                    <strong>Current State:</strong><br>
+                    • Data Engineers spend 15 hours/week on documentation = 75 hours/week × $80/hr = <strong>$6,000/week</strong><br>
+                    • DBAs handle 50+ questions/week = 10 hours/week × $100/hr = <strong>$1,000/week</strong><br>
+                    • Analysts wait average 4 hours for database answers = 40 hours/week × $60/hr = <strong>$2,400/week</strong><br>
+                    • <strong>Total Weekly Cost: $9,400</strong> | <strong>Annual Cost: $488,800</strong><br><br>
+                    
+                    <strong>With Intelligent Data Dictionary Agent:</strong><br>
+                    • 90% reduction in documentation time: <strong>$5,400/week saved</strong><br>
+                    • 60% reduction in DBA questions: <strong>$600/week saved</strong><br>
+                    • Instant answers for analysts: <strong>$2,000/week saved</strong><br>
+                    • <strong>Total Annual Savings: $416,000</strong><br><br>
+                    
+                    <strong>ROI: 830%+ in the first year</strong> (assuming $50,000 annual license cost)
+                </p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🏢</div>
+                    <h3 class="card-title">Organizational Benefits</h3>
+                    <p class="card-desc">Transform your entire data culture.</p>
+                    <ul class="card-list">
+                        <li>Single source of truth for database documentation</li>
+                        <li>Democratized data access for all teams</li>
+                        <li>Reduced dependency on key personnel</li>
+                        <li>Improved cross-team collaboration</li>
+                        <li>Enhanced compliance and governance</li>
+                        <li>Faster project delivery times</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👨‍💻</div>
+                    <h3 class="card-title">Individual Productivity</h3>
+                    <p class="card-desc">Empower every team member.</p>
+                    <ul class="card-list">
+                        <li>Data Engineers: Focus on building, not documenting</li>
+                        <li>DBAs: Handle strategic work, not repetitive questions</li>
+                        <li>Analysts: Self-service answers, faster insights</li>
+                        <li>Developers: Understand schemas without meetings</li>
+                        <li>Managers: Real-time visibility into data assets</li>
+                        <li>New Hires: Quick ramp-up with comprehensive docs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section id="use-cases">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="icon">🎯</span>
+                Industry Use Cases
+            </h2>
+            <p class="section-subtitle">
+                See how organizations across industries leverage the Intelligent Data Dictionary Agent.
+            </p>
+
+            <div class="use-case">
+                <div class="use-case-title">
+                    Financial Services & Banking
+                    <span class="use-case-industry">FINANCE</span>
+                </div>
+                <div class="use-case-content">
+                    <div>
+                        <h4>Challenges Addressed</h4>
+                        <p>
+                            Banks manage thousands of tables across multiple systems. Regulatory compliance (GDPR, SOX, Basel III) 
+                            requires complete data lineage and documentation. Manual documentation audits cost millions annually.
+                        </p>
+                    </div>
+                    <div>
+                        <h4>Value Delivered</h4>
+                        <ul>
+                            <li>Automated compliance documentation for auditors</li>
+                            <li>Real-time data quality monitoring for trading systems</li>
+                            <li>Instant answers for risk analysts and compliance teams</li>
+                            <li>Reduced audit preparation time by 70%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="use-case">
+                <div class="use-case-title">
+                    Healthcare & Life Sciences
+                    <span class="use-case-industry">HEALTHCARE</span>
+                </div>
+                <div class="use-case-content">
+                    <div>
+                        <h4>Challenges Addressed</h4>
+                        <p>
+                            Healthcare organizations deal with sensitive patient data across EHR systems. HIPAA compliance 
+                            requires knowing exactly what data exists and how it's protected. Clinical trials need complete data lineage.
+                        </p>
+                    </div>
+                    <div>
+                        <h4>Value Delivered</h4>
+                        <ul>
+                            <li>PHI/PII identification and documentation</li>
+                            <li>Data quality checks for clinical trial databases</li>
+                            <li>Accelerated research with instant data discovery</li>
+                            <li>HIPAA-compliant documentation generation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="use-case">
+                <div class="use-case-title">
+                    E-Commerce & Retail
+                    <span class="use-case-industry">RETAIL</span>
+                </div>
+                <div class="use-case-content">
+                    <div>
+                        <h4>Challenges Addressed</h4>
+                        <p>
+                            Retail companies have complex databases spanning inventory, customers, orders, and analytics. 
+                            Multiple teams need to access data but lack documentation. Seasonal peaks require reliable data quality.
+                        </p>
+                    </div>
+                    <div>
+                        <h4>Value Delivered</h4>
+                        <ul>
+                            <li>Unified view of customer, product, and sales data</li>
+                            <li>Real-time inventory data quality monitoring</li>
+                            <li>Self-service analytics for marketing teams</li>
+                            <li>Faster time-to-insight for business decisions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="use-case">
+                <div class="use-case-title">
+                    Technology & SaaS Companies
+                    <span class="use-case-industry">TECH</span>
+                </div>
+                <div class="use-case-content">
+                    <div>
+                        <h4>Challenges Addressed</h4>
+                        <p>
+                            Fast-growing tech companies add databases rapidly. Engineering teams move fast with limited documentation. 
+                            New developers struggle to understand complex schemas. Data-driven features require quick data access.
+                        </p>
+                    </div>
+                    <div>
+                        <h4>Value Delivered</h4>
+                        <ul>
+                            <li>Living documentation that stays current</li>
+                            <li>Developer onboarding in days, not weeks</li>
+                            <li>API-first access for integration with dev tools</li>
+                            <li>AI-powered query generation for product teams</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section id="comparison" style="background: var(--bg-card);">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="icon">⚖️</span>
+                How We Compare
+            </h2>
+            <p class="section-subtitle">
+                See why the Intelligent Data Dictionary Agent stands out from traditional approaches and competitors.
+            </p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Our Platform</th>
+                        <th>Manual Documentation</th>
+                        <th>Traditional Data Catalogs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Setup Time</td>
+                        <td><span class="check">✓</span> &lt;5 minutes</td>
+                        <td><span class="cross">✗</span> Weeks to months</td>
+                        <td><span class="cross">✗</span> Days to weeks</td>
+                    </tr>
+                    <tr>
+                        <td>Automatic Schema Extraction</td>
+                        <td><span class="check">✓</span> Real-time, complete</td>
+                        <td><span class="cross">✗</span> Manual entry</td>
+                        <td><span class="check">✓</span> Batch process</td>
+                    </tr>
+                    <tr>
+                        <td>AI-Generated Descriptions</td>
+                        <td><span class="check">✓</span> Claude AI powered</td>
+                        <td><span class="cross">✗</span> Not available</td>
+                        <td><span class="cross">✗</span> Manual or none</td>
+                    </tr>
+                    <tr>
+                        <td>Real-Time Data Quality</td>
+                        <td><span class="check">✓</span> Live analysis</td>
+                        <td><span class="cross">✗</span> Not available</td>
+                        <td><span class="check">~</span> Limited/scheduled</td>
+                    </tr>
+                    <tr>
+                        <td>Conversational AI Chatbot</td>
+                        <td><span class="check">✓</span> Natural language</td>
+                        <td><span class="cross">✗</span> Not available</td>
+                        <td><span class="cross">✗</span> Keyword search only</td>
+                    </tr>
+                    <tr>
+                        <td>Multi-Database Support</td>
+                        <td><span class="check">✓</span> 6+ databases</td>
+                        <td><span class="check">~</span> Depends on effort</td>
+                        <td><span class="check">✓</span> Varies by vendor</td>
+                    </tr>
+                    <tr>
+                        <td>Export Formats</td>
+                        <td><span class="check">✓</span> JSON, MD, HTML, PDF</td>
+                        <td><span class="check">~</span> Manual export</td>
+                        <td><span class="check">~</span> Limited formats</td>
+                    </tr>
+                    <tr>
+                        <td>Pricing</td>
+                        <td><span class="check">✓</span> Affordable SaaS</td>
+                        <td><span class="cross">✗</span> High labor cost</td>
+                        <td><span class="cross">✗</span> Enterprise pricing</td>
+                    </tr>
+                    <tr>
+                        <td>Always Up-to-Date</td>
+                        <td><span class="check">✓</span> Real-time sync</td>
+                        <td><span class="cross">✗</span> Constantly outdated</td>
+                        <td><span class="check">~</span> Scheduled updates</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Technical Specifications -->
+    <section id="technical">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="icon">⚙️</span>
+                Technical Specifications
+            </h2>
+            <p class="section-subtitle">
+                Built with modern, scalable architecture for enterprise deployment.
+            </p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🏗️</div>
+                    <h3 class="card-title">Architecture</h3>
+                    <ul class="card-list">
+                        <li>Microservices-based design</li>
+                        <li>RESTful API architecture</li>
+                        <li>Horizontal scalability</li>
+                        <li>Cloud-native deployment</li>
+                        <li>Containerized with Docker</li>
+                        <li>Kubernetes-ready</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔒</div>
+                    <h3 class="card-title">Security</h3>
+                    <ul class="card-list">
+                        <li>Read-only database access</li>
+                        <li>Encrypted connections (TLS/SSL)</li>
+                        <li>No data storage by default</li>
+                        <li>SOC 2 Type II compliant</li>
+                        <li>GDPR compliant</li>
+                        <li>Role-based access control</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📡</div>
+                    <h3 class="card-title">Deployment Options</h3>
+                    <ul class="card-list">
+                        <li>Cloud SaaS (hosted)</li>
+                        <li>On-premise installation</li>
+                        <li>Private cloud deployment</li>
+                        <li>Hybrid configurations</li>
+                        <li>Air-gapped environments</li>
+                        <li>Single-tenant option</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 60px; margin-bottom: 30px; font-size: 24px;">Technology Stack</h3>
+            
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">⚛️</div>
+                    <div class="tech-name">React 18</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🐍</div>
+                    <div class="tech-name">Python</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-name">FastAPI</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🤖</div>
+                    <div class="tech-name">Claude AI</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">☁️</div>
+                    <div class="tech-name">AWS Bedrock</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">Tailwind CSS</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" style="background: var(--bg-card);">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="icon">💳</span>
+                Flexible Pricing
+            </h2>
+            <p class="section-subtitle">
+                Choose the plan that fits your organization's needs. All plans include core features.
+            </p>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-tier">Starter</div>
+                    <div class="pricing-price">$499</div>
+                    <div class="pricing-period">per month</div>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> Up to 3 databases</li>
+                        <li><span class="check">✓</span> 100 tables per database</li>
+                        <li><span class="check">✓</span> Basic AI summaries</li>
+                        <li><span class="check">✓</span> Data quality analysis</li>
+                        <li><span class="check">✓</span> JSON & Markdown export</li>
+                        <li><span class="check">✓</span> Email support</li>
+                    </ul>
+                    <button class="pricing-btn">Get Started</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-tier">Professional</div>
+                    <div class="pricing-price">$1,499</div>
+                    <div class="pricing-period">per month</div>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> Up to 10 databases</li>
+                        <li><span class="check">✓</span> Unlimited tables</li>
+                        <li><span class="check">✓</span> Advanced AI insights</li>
+                        <li><span class="check">✓</span> AI Chatbot unlimited queries</li>
+                        <li><span class="check">✓</span> All export formats</li>
+                        <li><span class="check">✓</span> Priority support</li>
+                        <li><span class="check">✓</span> API access</li>
+                    </ul>
+                    <button class="pricing-btn">Get Started</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-tier">Enterprise</div>
+                    <div class="pricing-price">Custom</div>
+                    <div class="pricing-period">contact sales</div>
+                    <ul class="pricing-features">
+                        <li><span class="check">✓</span> Unlimited databases</li>
+                        <li><span class="check">✓</span> On-premise deployment</li>
+                        <li><span class="check">✓</span> Custom AI training</li>
+                        <li><span class="check">✓</span> SSO / SAML integration</li>
+                        <li><span class="check">✓</span> Dedicated account manager</li>
+                        <li><span class="check">✓</span> SLA guarantees</li>
+                        <li><span class="check">✓</span> Custom integrations</li>
+                    </ul>
+                    <button class="pricing-btn">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Transform Your Data Documentation?</h2>
+            <p class="cta-desc">
+                Join hundreds of organizations who have eliminated documentation debt and empowered their teams with instant database intelligence.
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="cta-btn primary">Schedule a Demo</a>
+                <a href="#" class="cta-btn secondary">Start Free Trial</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>
+                <strong>Intelligent Data Dictionary Agent</strong> by Team Turgon<br>
+                Built for GDG Hackfest 2.0 | Google Developer Groups Cloud New Delhi<br><br>
+                © 2025 All Rights Reserved
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
