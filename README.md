@@ -65,30 +65,33 @@ data engineers who need to onboard new teammates fast.
 
 ## 🏗️ Architecture
 
+
+<img width="2548" height="4614" alt="flow-diagram-main" src="https://github.com/user-attachments/assets/bb9a2b30-9495-4b29-962e-fdc845bd0f92" />
+
 ```
 ┌─────────────── React Frontend (Port 3000) ──────────────────┐
 │  Dashboard  │  Tables  │  Quality  │  Chat  │  Export       │
 └──────────────────────────┬──────────────────────────────────┘
                            │ Axios + API Key
 ┌──────────────────────────▼──────────────────────────────────┐
-│              FastAPI Backend (Port 8000)                      │
-│                                                              │
+│              FastAPI Backend (Port 8000)                    │
+│                                                             │
 │  ┌─────────┐  ┌──────────────┐  ┌──────────────────────┐    │
 │  │ Auth    │  │ Trace-ID     │  │ Structured JSON      │    │
 │  │ (API Key│  │ Middleware   │  │ Logging              │    │
 │  └────┬────┘  └──────┬───────┘  └──────────────────────┘    │
-│       │              │                                       │
+│       │              │                                      │
 │  ┌────▼──────────────▼───────────────────────────────────┐  │
-│  │                   Session Store                        │  │
-│  │    DatabaseConnector · SchemaExtractor                  │  │
-│  │    QualityAnalyzer · AISummaryGenerator                 │  │
-│  │    DocumentationGenerator                              │  │
-│  └────────────────────────────────────────────────────────┘  │
-│       │                                                      │
-│  ┌────▼──────────┐  ┌──────────────┐  ┌────────────┐       │
-│  │ SQLAlchemy    │  │ Groq API     │  │ File I/O   │       │
-│  │ + Pool (R/O)  │  │ (LLM)        │  │ (exports)  │       │
-│  └───────────────┘  └──────────────┘  └────────────┘       │
+│  │                   Session Store                       │  │
+│  │    DatabaseConnector · SchemaExtractor                │  │
+│  │    QualityAnalyzer · AISummaryGenerator               │  │
+│  │    DocumentationGenerator                             │  │
+│  └───────────────────────────────────────────────────────┘  │
+│       │                                                     │
+│  ┌────▼──────────┐  ┌──────────────┐  ┌────────────┐        │
+│  │ SQLAlchemy    │  │ Groq API     │  │ File I/O   │        │
+│  │ + Pool (R/O)  │  │ (LLM)        │  │ (exports)  │        │
+│  └───────────────┘  └──────────────┘  └────────────┘        │
 └──────────────────────────────────────────────────────────────┘
 ```
 
