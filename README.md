@@ -2,6 +2,24 @@
 
 # 📚 Data Dictionary Agent v4
 
+## 🎥 Demo Video
+
+<p align="center">
+  <a href="https://drive.google.com/file/d/1_ntQT3n7i6GjL1EUuzIthrlvVGh7tEhF/view">
+    <img src="https://img.shields.io/badge/▶-Watch_Demo_Video-0A66C2?style=for-the-badge&logo=google-drive&logoColor=white" />
+  </a>
+</p>
+
+
+<img width="1918" height="934" alt="Screenshot 2026-02-22 104414" src="https://github.com/user-attachments/assets/36651689-2ee3-4c8c-a2a3-35af2a25bdd3" />
+<img width="1919" height="941" alt="Screenshot 2026-02-22 104211" src="https://github.com/user-attachments/assets/41f67332-7586-4e38-8a19-95f62d393c02" />
+<img width="1919" height="957" alt="Screenshot 2026-02-22 104158" src="https://github.com/user-attachments/assets/cc475c75-bc2b-45ac-907d-206a71ac6781" />
+<img width="1919" height="946" alt="Screenshot 2026-02-22 104134" src="https://github.com/user-attachments/assets/4151759d-a2ed-4fa9-8c42-cf643c197170" />
+<img width="1919" height="943" alt="Screenshot 2026-02-22 102549" src="https://github.com/user-attachments/assets/264ed599-a3cf-40cb-9706-d493720a9782" />
+<img width="1919" height="949" alt="Screenshot 2026-02-22 104428" src="https://github.com/user-attachments/assets/13804e27-1d49-4f65-a9c9-09c37a27fa0d" />
+
+
+
 ### AI-Powered Database Documentation & Analysis Platform
 
 *Connect to any database, extract its schema, analyze data quality, chat with AI,
